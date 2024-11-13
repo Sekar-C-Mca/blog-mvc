@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Blog</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121266; /* Background color */
+      color: #b0f320; /* Text color */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    /* Main content box styling */
+    .content-box {
+      background-color: #ffffff; /* Contrasting background for content */
+      color: #333333; /* Dark text for readability */
+      padding: 40px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 800px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #4CAF50;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h2, h3 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      text-align: center;
+      max-width: 800px;
+      margin: 20px auto;
+    }
+
+    a {
+      text-decoration: none;
+      color: #007BFF;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Post links container styling */
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin: 20px 0;
+    }
+
+    ul li {
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Edit and Delete link styling */
+    .edit-link {
+      color: green;
+    }
+
+    .delete-link {
+      color: red;
+    }
+
+    /* Form styling */
+    form {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    input, textarea, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    input, textarea {
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      width: auto;
+      max-width: 150px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="content-box">
+    <h1>Welcome to the Simple Blog</h1>
+    <h2>All Posts</h2>
+    <ul>
+      <% posts.forEach(post => { %>
+        <li>
+          <a href="/posts/<%= post.id %>"><%= post.title %></a>
+          <div>
+            <a href="/posts/<%= post.id %>/edit" class="edit-link">Edit</a>
+            <a href="/posts/<%= post.id %>/delete" class="delete-link" onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+
+    <h3>Add a New Post</h3>
+    <form action="/posts/create" method="POST">
+      <label for="title">Title:</label><br>
+      <input type="text" name="title" id="title" required><br>
+
+      <label for="content">Content:</label><br>
+      <textarea name="content" id="content" rows="4" required></textarea><br>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
